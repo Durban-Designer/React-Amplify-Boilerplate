@@ -1,0 +1,108 @@
+{
+	"function": {
+		"dynamo1e9dcf35Trigger62eb1b2a": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"dependsOn": [
+				{
+					"category": "storage",
+					"resourceName": "dynamo1e9dcf35",
+					"attributes": [
+						"Name",
+						"Arn",
+						"StreamArn"
+					]
+				}
+			]
+		},
+		"ceadprototypece62cbad": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"dependsOn": [
+				{
+					"category": "storage",
+					"resourceName": "dynamo1e9dcf35",
+					"attributes": [
+						"Name",
+						"Arn"
+					]
+				}
+			]
+		},
+		"ceadprototype4130ee00": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"dependsOn": [
+				{
+					"category": "storage",
+					"resourceName": "dynamodb2fb8a4",
+					"attributes": [
+						"Name",
+						"Arn"
+					]
+				}
+			]
+		}
+	},
+	"storage": {
+		"dynamo1e9dcf35": {
+			"service": "DynamoDB",
+			"providerPlugin": "awscloudformation"
+		},
+		"dynamodb2fb8a4": {
+			"service": "DynamoDB",
+			"providerPlugin": "awscloudformation"
+		}
+	},
+	"auth": {
+		"cognitob1456450": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation"
+		},
+		"cognito8a302295": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation"
+		}
+	},
+	"api": {
+		"api8c15d800": {
+			"service": "API Gateway",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "ceadprototypece62cbad",
+					"attributes": [
+						"Name",
+						"Arn"
+					]
+				}
+			]
+		},
+		"ceadprototype": {
+			"service": "AppSync",
+			"providerPlugin": "awscloudformation",
+			"output": {
+				"authConfig": {
+					"additionalAuthenticationProviders": [],
+					"defaultAuthentication": {
+						"authenticationType": "API_KEY",
+						"apiKeyConfig": {
+							"description": "test",
+							"apiKeyExpirationDays": "7"
+						}
+					}
+				}
+			}
+		}
+	},
+	"hosting": {
+		"amplifyhosting": {
+			"service": "amplifyhosting",
+			"type": "cicd"
+		}
+	}
+}

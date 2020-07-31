@@ -1,0 +1,41 @@
+{
+    "paths": [
+        {
+            "name": "/API",
+            "lambdaFunction": "ceadprototypece62cbad",
+            "privacy": {
+                "private": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ]
+            }
+        }
+    ],
+    "resourceName": "api8c15d800",
+    "apiName": "api8c15d800",
+    "functionArns": [
+        {
+            "lambdaFunction": "ceadprototypece62cbad"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 0,
+        "authRoleName": "amplify-cead-prototype-cead-95733-authRole",
+        "unAuthRoleName": "amplify-cead-prototype-cead-95733-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "ceadprototypece62cbad",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

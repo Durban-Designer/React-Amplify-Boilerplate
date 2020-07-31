@@ -1,0 +1,6 @@
+type Customer @model {
+  id: ID!
+  name: String!
+  email: String!
+  dispensary: String
+}
