@@ -15,6 +15,8 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 // components
 import Navbar from '../components/Navbar';
+// actions
+import { login } from '../actions/navigationController';
 // misc
 import BaseStyle from '../assets/BaseStyle.js';
 
@@ -36,7 +38,8 @@ class Login extends Component {
   login () {
     // TODO login logic
     if (this.state.email === 'test@gmail.com' && this.state.password === 'test') {
-      navigate('/home');
+      this.props.login();
+      navigate('/authed');
     } else {
       this.setState({
         error: true
@@ -134,7 +137,7 @@ class Login extends Component {
           </GridItem>
         </GridContainer>
         <Typography variant='body2' className={classes.header}>
-          By continuing, you agree to our <button className={classes.link} onClick={() => this.props.handleNavigation('/terms')}>Terms</button> and <button className={classes.link} onClick={() => this.props.handleNavigation('/privacy')}>Privacy Policy</button>.
+          By continuing, you agree to our <button className={classes.link} onClick={() => navigate('/terms')}>Terms</button> and <button className={classes.link} onClick={() => navigate('/privacy')}>Privacy Policy</button>.
         </Typography>
       </div>
     );
@@ -192,7 +195,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-      // for when redux
+      login: () => dispatch(login())
   };
 }
 

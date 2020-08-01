@@ -6,12 +6,11 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 // components
 import Loading from './components/Loading.js';
 // pages
-const Sales = lazy(() => import('./pages/Sales.js'));
+const Home = lazy(() => import('./pages/Home.js'));
 const Privacy = lazy(() => import('./pages/Privacy.js'));
 const Terms = lazy(() => import('./pages/Terms.js'));
-const Home = lazy(() => import('./pages/Home.js'));
 const Login = lazy(() => import('./pages/Login.js'));
-const Checkin = lazy(() => import('./pages/Checkin.js'));
+const AuthProtectedPage = lazy(() => import('./pages/AuthProtectedPage.js'));
 const NoMatch = lazy(() => import('./pages/404.js'));
 // misc
 const themeData = lazy(() => import('./assets/Theme.js'));
@@ -34,12 +33,11 @@ class App extends Component {
         <Suspense fallback={<Loading />}>
           <MuiThemeProvider theme={theme}>
             <Router>
-              <Sales path='/' />
+              <Home path='/' />
               <Privacy path='/privacy' />
               <Terms path='/terms' />
-              <Home path='/home' />
               <Login path='/login' />
-              <Checkin path='/checkin' />
+              <AuthProtectedPage path='/authed' />
               <NoMatch default />
             </Router>
           </MuiThemeProvider>

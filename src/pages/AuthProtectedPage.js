@@ -7,17 +7,20 @@ import { withStyles } from '@material-ui/core/styles';
 import Navbar from '../components/Navbar';
 // misc
 import BaseStyle from '../assets/BaseStyle.js';
-import logo from '../assets/images/Icons/logo.svg';
 
-class Sales extends Component {
+class AuthProtectedPage extends Component {
+  constructor (props) {
+    super(props);
+  }
+
   render () {
     const { classes } = this.props;
 
     return (
       <div className={classes.main}>
-        <Navbar pageName='Sales' />
+        <Navbar pageName='AuthProtectedPage' />
         <div className={classes.page}>
-          <img src={logo} className={classes.image} alt={'Logo'}/>
+          { /* Page contents go in here*/ }
         </div>
       </div>
     );
@@ -40,4 +43,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Sales));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(AuthProtectedPage));

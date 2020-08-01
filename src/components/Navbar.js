@@ -1,7 +1,7 @@
 // packages
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { navigate } from "@reach/router"
+import { navigate } from "@reach/router";
 // material UI components
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -14,16 +14,17 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+// actions
+import { logout } from '../actions/navigationController';
 // misc
 import BaseStyle from '../assets/BaseStyle.js';
 
 const pages = [
-  { name: 'Sales', path: '/' }
+  { name: 'Home', path: '/' }
 ]
 
 const loggedPages = [
-  { name: 'Home', path: '/home' },
-  { name: 'Checkin', path: '/checkin' }
+  { name: 'Authed', path: '/authed' }
 ]
 
 class Navbar extends Component {
@@ -45,7 +46,8 @@ class Navbar extends Component {
   }
 
   logout () {
-    // TODO
+    this.props.logout();
+    navigate('/login')
   }
 
   render(){
@@ -59,7 +61,7 @@ class Navbar extends Component {
               {this.props.pageName}
             </Typography>
             {
-              !this.props.userId && this.props.address !== '/login'
+              !this.props.logged
               ?
               <Button onClick={() => navigate('/login')}>
                 Login
@@ -95,7 +97,7 @@ class Navbar extends Component {
           >
             <List className={classes.list}>
               {
-                this.props.userId
+                this.props.logged
                 ?
                 loggedPages.map((page, i) => (
                   <ListItem
@@ -120,14 +122,14 @@ class Navbar extends Component {
               <ListItem
                 button
                 onClick={() =>
-                  this.props.userId
+                  this.props.logged
                   ?
                   this.logout()
                   :
                   navigate('/login')
                 }
               >
-                <ListItemText primary={this.props.userId ? 'Logout' : 'Login'} />
+                <ListItemText primary={this.props.logged ? 'Logout' : 'Login'} />
               </ListItem>
             </List>
           </div>
@@ -168,13 +170,13 @@ const styles = {
 
 function mapStateToProps(state) {
   return {
-    // for when redux
+    logged: state.navigationReducer.logged
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    // for when redux
+    logout: () => dispatch(logout())
   };
 }
 

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import customerReducer from './customerReducer';
+import navigationReducer from './navigationReducer';
 
 export default combineReducers({
- customerReducer,
+ navigationReducer,
 });
